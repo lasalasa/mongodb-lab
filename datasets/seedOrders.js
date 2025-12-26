@@ -1,8 +1,8 @@
-// seedOrders.js
+require("dotenv").config();
 const { MongoClient } = require("mongodb");
 
-const uri = "mongodb://localhost:27017";
-const dbName = "perf_lab";
+const uri = process.env.MONGODB_URI || "mongodb://admin:password@localhost:27018";
+const dbName = "learning_lab";
 const collectionName = "orders";
 
 const TOTAL_DOCS = 1_000_000;
@@ -23,7 +23,7 @@ async function run() {
     const col = db.collection(collectionName);
 
     console.log("Dropping existing collection (if any)...");
-    await col.drop().catch(() => {});
+    await col.drop().catch(() => { });
 
     const statuses = ["pending", "paid", "shipped", "cancelled"];
     const countries = ["UK", "US", "AU", "DE", "FR", "IN"];
@@ -59,12 +59,12 @@ async function run() {
       }
 
       await col.insertMany(batch);
-      console.log(`Inserted: ${(inserted + BATCH_SIZE).toLocaleString()}`);
+      // console.log(`Inserted: ${(inserted + BATCH_SIZE).toLocaleString()}`);
     }
 
     console.log("Done seeding!");
     const count = await col.countDocuments();
-    console.log("Total documents in collection:", count.toLocaleString());
+    // console.log("Total documents in collection:", count.toLocaleString());
   } catch (err) {
     console.error(err);
   } finally {

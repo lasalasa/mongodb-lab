@@ -1,0 +1,15 @@
+{
+    "name": "mongodb-lab",
+    "version": "1.0.0",
+    "description": "MongoDB Learning Lab",
+    "scripts": {
+        "seed": "node datasets/seedOrders.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "dotenv": "^17.2.3",
+        "mongodb": "^6.3.0"
+    },
+    "author": "Lasantha Lakmal",
+    "license": "ISC"
+}
